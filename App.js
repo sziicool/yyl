@@ -1,58 +1,97 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
+import SplashScreen from 'react-native-splash-screen'
 import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { View, Easing, Animated } from 'react-native';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import MainScreen from './src/components/MainScreen';
+import BrushteethMethod from './src/components/BrushteethMethod';
+import VideoScreen from './src/components/VideoScreen';
 
-type Props = {};
-export default class App extends Component<Props> {
+import { StackNavigator } from 'react-navigation';
+
+const RouteConfigs = {
+  Main: {
+    screen: MainScreen,
+    navigationOptions: ({ navigation }) => ({
+      header: null
+    }),
+  },
+  BrushMethod: {
+    screen: BrushteethMethod,
+    navigationOptions: ({ navigation }) => ({
+      // header:null
+      title: '刷牙方法教程',
+      headerStyle: {
+        // backgroundColor:'rgba(31,35,32,0.4)'
+      },
+      headerMode: 'screen'
+    }),
+  },
+  VideoScreen: {
+    screen: VideoScreen,
+    navigationOptions: ({ navigation }) => ({
+      // header:null
+      title: '刷牙方法教程',
+      headerStyle: {
+        // backgroundColor:'rgba(31,35,32,0.4)'
+      },
+      headerMode: 'screen'
+    }),
+  },
+};
+
+const StackNavigatorConfig = {
+  initialRouteName: 'Main',
+  initialRouteParams: { initPara: '初始页面参数' },
+  navigationOptions: {
+    title: '标题',
+    headerTitleStyle: { fontSize: 18, color: '#666666' },
+    headerStyle: { height: 48, backgroundColor: '#fff' },
+  },
+  paths: 'page/main',
+  mode: 'card',
+  headerMode: 'screen',
+  cardStyle: { backgroundColor: "#ffffff" },
+  transitionConfig: (() => ({
+    transitionSpec: {
+      duration: 300,
+      easing: Easing.out(Easing.poly(4)),
+      timing: Animated.timing,
+    },
+    screenInterpolator: sceneProps => {
+      const { layout, position, scene } = sceneProps;
+      const { index } = scene;
+
+      const height = layout.initHeight;
+      const translateY = position.interpolate({
+        inputRange: [index - 1, index, index + 1],
+        outputRange: [height, 0, 0],
+      });
+
+      const opacity = position.interpolate({
+        inputRange: [index - 1, index - 0.99, index],
+        outputRange: [0, 1, 1],
+      });
+
+      return { opacity, transform: [{ translateY }] };
+    },
+  })),
+  onTransitionStart: (() => {
+    console.log('页面跳转动画开始');
+  }),
+  onTransitionEnd: (() => {
+    console.log('页面跳转动画结束');
+  }),
+};
+
+
+const Navigator = StackNavigator(RouteConfigs, StackNavigatorConfig)
+
+export default class App extends Component {
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
-    );
+    return <Navigator />
+  }
+  componentDidMount() {
+    SplashScreen.hide();
+    // Navigator.navigation.navigate('Main', {param: 'i am the param'}); 
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
