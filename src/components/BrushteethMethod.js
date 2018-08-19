@@ -12,12 +12,10 @@ export default class BrushteethMethod extends Component {
 
   render() {
     return <ImageBackground style={styles.bg} source={require('../imgs/bg.png')} >
-      <View style={styles.header}>
+      {/* <View style={styles.header}>
         <Image style={styles.backarrow} source={require('../imgs/backarrow.png')}></Image>
-        {/* <View style={ styles.header }> */}
         <Text style={styles.header}>刷牙方法教程</Text>
-        {/* </View> */}
-      </View>
+      </View> */}
       <TouchableOpacity onPress={() => {
 
         const navigateAction = NavigationActions.navigate({

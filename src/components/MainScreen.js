@@ -8,6 +8,8 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+import I18n from '../lang/i18n';
+
 import { NavigationActions } from 'react-navigation';
 export default class MainScreen extends Component {
 
@@ -24,32 +26,32 @@ export default class MainScreen extends Component {
         <View style={styles.topbar}>
           <TouchableOpacity style={ styles.gridtext }>
             <Image style={styles.topmenuimg} source={require('../imgs/setting.png')} />
-            <Text>设置</Text>
+            <Text>{ I18n.t('setting') }</Text>
           </TouchableOpacity>
           <TouchableOpacity style={ styles.gridtext }>
             <Image style={styles.topmenuimg} source={require('../imgs/communication.png')} />
-            <Text>常见儿童</Text>
-            <Text>问题交流</Text>
+            <Text>{ I18n.t('commonchild') }</Text>
+            <Text>{ I18n.t('community') }</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.mainGrid}>
           <TouchableOpacity style={ styles.gridtext } onPress={ ()=>{ this.press('BrushMethod') } }>
             <Image style={styles.mainGridimg} source={require('../imgs/brushteeth.png')} />
-            <Text>刷牙方法教程</Text>
+            <Text>{ I18n.t('brushteeth') }</Text>
           </TouchableOpacity>
           <TouchableOpacity style={ styles.gridtext }>
             <Image style={styles.mainGridimg} source={require('../imgs/teethgrow.png')} />
-            <Text>牙齿生长</Text>
+            <Text>{ I18n.t('teethgrow') }</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.mainGrid}>
           <TouchableOpacity style={ styles.gridtext }>
             <Image style={styles.mainGridimg} source={require('../imgs/teethsick.png')} />
-            <Text>常见儿童牙齿问题</Text>
+            <Text>{ I18n.t('teethsick') }</Text>
           </TouchableOpacity>
           <TouchableOpacity style={ styles.gridtext }>
             <Image style={styles.mainGridimg} source={require('../imgs/brushrecord.png')} />
-            <Text>刷牙记录</Text>
+            <Text>{ I18n.t('brushrecord') }</Text>
           </TouchableOpacity>
         </View>
       </View>

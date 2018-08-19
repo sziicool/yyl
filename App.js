@@ -7,6 +7,7 @@ import BrushteethMethod from './src/components/BrushteethMethod';
 import VideoScreen from './src/components/VideoScreen';
 
 import { StackNavigator } from 'react-navigation';
+import I18n from './src/lang/i18n';
 
 const RouteConfigs = {
   Main: {
@@ -19,7 +20,7 @@ const RouteConfigs = {
     screen: BrushteethMethod,
     navigationOptions: ({ navigation }) => ({
       // header:null
-      title: '刷牙方法教程',
+      title: I18n.t('brushteeth'),
       headerStyle: {
         // backgroundColor:'rgba(31,35,32,0.4)'
       },
@@ -30,7 +31,7 @@ const RouteConfigs = {
     screen: VideoScreen,
     navigationOptions: ({ navigation }) => ({
       // header:null
-      title: '刷牙方法教程',
+      title: I18n.t('brushteeth'),
       headerStyle: {
         // backgroundColor:'rgba(31,35,32,0.4)'
       },

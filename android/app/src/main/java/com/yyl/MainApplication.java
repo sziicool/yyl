@@ -13,6 +13,7 @@ import java.util.List;
 import com.brentvatne.react.ReactVideoPackage;
 
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
+import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 
 public class MainApplication extends Application  implements ReactApplication {
 
@@ -28,7 +29,8 @@ public class MainApplication extends Application  implements ReactApplication {
       return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
         new SplashScreenReactPackage(),
-        new ReactVideoPackage()
+        new ReactVideoPackage(),
+        new RNI18nPackage()
       );
     }
 
